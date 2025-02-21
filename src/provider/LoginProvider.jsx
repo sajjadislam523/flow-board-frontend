@@ -32,6 +32,7 @@ const LoginProvider = ({ children }) => {
 
     const contextData = {
         user,
+        setUser,
         loading,
         googleSignIn,
     };
