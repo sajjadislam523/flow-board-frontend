@@ -28,17 +28,16 @@ const Login = () => {
         <div
             className="flex items-center justify-center min-h-screen bg-gray-100 bg-center bg-cover dark:bg-gray-900"
             style={{
-                backgroundImage: "url('/background.png')",
+                backgroundImage: "url('/bg.avif')",
             }}
         >
             <div className="absolute inset-0 bg-black opacity-50 dark:opacity-70"></div>
-            <div className="relative z-10 w-full max-w-md p-8 bg-transparent rounded-lg shadow-lg">
-                <h1 className="mb-4 text-4xl font-extrabold text-center text-gray-900 dark:text-gray-100">
-                    Welcome Back!
+            <div className="relative z-10 w-full max-w-md p-8 bg-white rounded-lg shadow-lg dark:bg-gray-800">
+                <h1 className="mb-4 text-3xl font-extrabold text-center text-gray-900 dark:text-gray-100">
+                    Welcome to Flow Board!
                 </h1>
                 <p className="mb-6 text-lg text-center text-gray-700 dark:text-gray-300">
-                    Sign in to access your account and manage your tasks
-                    efficiently.
+                    Sign in to access your tasks and boost your productivity.
                 </p>
                 <Button
                     onClick={handleGoogleSignIn}
@@ -46,21 +45,6 @@ const Login = () => {
                 >
                     Sign in with Google
                 </Button>
-                <button
-                    onClick={() => {
-                        const rootElement = document.documentElement;
-                        if (rootElement.classList.contains("dark")) {
-                            rootElement.classList.remove("dark");
-                            localStorage.setItem("theme", "light");
-                        } else {
-                            rootElement.classList.add("dark");
-                            localStorage.setItem("theme", "dark");
-                        }
-                    }}
-                    className="w-full px-4 py-2 text-gray-800 bg-gray-200 rounded dark:bg-gray-700 dark:text-gray-200"
-                >
-                    Toggle Dark Mode
-                </button>
             </div>
         </div>
     );

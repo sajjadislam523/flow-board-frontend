@@ -27,7 +27,9 @@ const LoginProvider = ({ children }) => {
             setUser(user);
             setLoading(false);
         });
-        return unsubscribe();
+        return () => {
+            return unsubscribe();
+        };
     }, []);
 
     const contextData = {

@@ -1,6 +1,13 @@
+import ThemeToggle from "@/components/ThemeToggle";
+import useLogin from "@/hooks/useLogin";
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
+    const { user, loading } = useLogin();
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
     return (
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
             <nav className="p-4 text-white bg-blue-600">
@@ -19,15 +26,21 @@ const Dashboard = () => {
                         </li>
                         <li>
                             <NavLink
-                                to="all-tasks"
+                                to="task-board"
                                 className={({ isActive }) =>
                                     isActive ? "underline font-semibold" : ""
                                 }
                             >
-                                All Tasks
+                                Tasks
                             </NavLink>
                         </li>
                     </ul>
+                    <div className="flex items-center space-x-4">
+                        <ThemeToggle />
+                        <p className="text-center text-gray-600 dark:text-gray-300">
+                            Welcome, {user.displayName}!
+                        </p>
+                    </div>
                 </div>
             </nav>
             <main className="container p-4 mx-auto">

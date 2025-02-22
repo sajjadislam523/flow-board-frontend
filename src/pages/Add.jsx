@@ -1,18 +1,28 @@
+import useLogin from "@/hooks/useLogin";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Add = () => {
+    const { user } = useLogin();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const navigate = useNavigate();
+    const [category, setCategory] = useState("To-Do");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const newTask = { title, description, category: "To Do" };
+        const newTask = {
+            title,
+            description,
+            category,
+            email: user.email,
+            timestamp: new Date().toLocaleString(),
+            taskID: Date.now(),
+        };
         try {
             await axios.post("http://localhost:5000/task", newTask);
-            navigate("/dashboard/all-tasks");
+            navigate("/dashboard/task-board");
             console.log(newTask);
         } catch (error) {
             console.error(error);
@@ -40,6 +50,19 @@ const Add = () => {
                     onChange={(e) => setDescription(e.target.value)}
                     required
                 />
+
+                {/* Type */}
+
+                <select
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    className="w-full p-2 mb-4 border rounded dark:bg-gray-700 dark:text-gray-100"
+                >
+                    <option value="To-Do">To-Do</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Done">Done</option>
+                </select>
+
                 <button
                     type="submit"
                     className="w-full py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
