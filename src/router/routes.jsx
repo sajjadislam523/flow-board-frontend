@@ -2,6 +2,7 @@ import Dashboard from "@/components/Dashboard";
 import Add from "@/pages/Add";
 import Edit from "@/pages/Edit";
 import TaskBoard from "@/pages/TaskBoard";
+import PrivateRoute from "@/router/PrivateRoute";
 import { createBrowserRouter } from "react-router-dom";
 import Login from "../pages/Login";
 
@@ -12,21 +13,23 @@ const routes = createBrowserRouter([
     },
     {
         path: "dashboard",
-        element: <Dashboard />,
+        element: (
+            <PrivateRoute>
+                <Dashboard />
+            </PrivateRoute>
+        ),
         children: [
             {
                 path: "add-task",
                 element: <Add />,
             },
-            // {
-            //     path: "all-tasks",
-            //     element: <AllTasks />,
-            // },
             {
                 path: "task-board/:id",
                 element: <Edit />,
                 loader: ({ params }) =>
-                    fetch(`http://localhost:5000/task/${params.id}`),
+                    fetch(
+                        `https://backend-teal-five-18.vercel.app/task/${params.id}`
+                    ),
             },
             {
                 path: "task-board",

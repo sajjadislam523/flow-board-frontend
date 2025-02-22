@@ -1,3 +1,4 @@
+import Loading from "@/components/Loading";
 import useLogin from "@/hooks/useLogin";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -16,7 +17,7 @@ const TaskBoard = () => {
         queryKey: ["tasks", user?.email],
         queryFn: async () => {
             const res = await axios.get(
-                `http://localhost:5000/tasks/${user?.email}`
+                `https://backend-teal-five-18.vercel.app/tasks/${user?.email}`
             );
             return res.data;
         },
@@ -42,7 +43,7 @@ const TaskBoard = () => {
     const updateTaskMutation = useMutation({
         mutationFn: async (updatedTask) => {
             await axios.put(
-                `http://localhost:5000/tasks/category/${updatedTask._id}`,
+                `https://backend-teal-five-18.vercel.app/tasks/category/${updatedTask._id}`,
                 {
                     category: updatedTask.category,
                 }
@@ -53,7 +54,9 @@ const TaskBoard = () => {
 
     const deleteTaskMutation = useMutation({
         mutationFn: async (taskId) => {
-            await axios.delete(`http://localhost:5000/task/${taskId}`);
+            await axios.delete(
+                `https://backend-teal-five-18.vercel.app/task/${taskId}`
+            );
         },
         onSuccess: () => refetch(),
     });
@@ -92,19 +95,15 @@ const TaskBoard = () => {
         updateTaskMutation.mutate(movedTask);
     };
 
-    if (loading || isLoading)
-        return <div className="py-8 text-center">Loading...</div>;
+    if (loading || isLoading) return <Loading />;
 
     return (
         <div className="min-h-screen bg-base-100">
             <div className="navbar bg-base-300">
                 <div className="flex-1">
-                    <h1 className="ml-4 text-xl font-bold">Task Board</h1>
-                </div>
-                <div className="flex-none gap-4 mr-4">
-                    <Link to="/addTask" className="btn btn-primary">
-                        Add Task
-                    </Link>
+                    <h1 className="ml-4 text-xl font-bold text-center">
+                        Task Board
+                    </h1>
                 </div>
             </div>
 

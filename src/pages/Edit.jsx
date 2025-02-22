@@ -18,7 +18,7 @@ const Edit = () => {
 
         try {
             await axios.patch(
-                `http://localhost:5000/task/${task._id}`,
+                `https://backend-teal-five-18.vercel.app/task/${task._id}`,
                 updatedTask
             );
             navigate("/dashboard/task-board");

@@ -18,9 +18,11 @@ const Login = () => {
                 photoURL: res.user.photoURL,
             };
 
-            axios.post("http://localhost:5000/user", userInfo).then((res) => {
-                console.log(res.data);
-            });
+            axios
+                .post("https://backend-teal-five-18.vercel.app/user", userInfo)
+                .then((res) => {
+                    console.log(res.data);
+                });
         });
     };
 

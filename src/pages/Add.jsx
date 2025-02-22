@@ -21,7 +21,10 @@ const Add = () => {
             taskID: Date.now(),
         };
         try {
-            await axios.post("http://localhost:5000/task", newTask);
+            await axios.post(
+                "https://backend-teal-five-18.vercel.app/task",
+                newTask
+            );
             navigate("/dashboard/task-board");
             console.log(newTask);
         } catch (error) {

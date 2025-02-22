@@ -3,6 +3,7 @@ import {
     GoogleAuthProvider,
     onAuthStateChanged,
     signInWithPopup,
+    signOut,
 } from "firebase/auth";
 import { PropTypes } from "prop-types";
 import { createContext, useEffect, useState } from "react";
@@ -21,6 +22,11 @@ const LoginProvider = ({ children }) => {
         return signInWithPopup(auth, googleProvider);
     };
 
+    const logOut = () => {
+        setLoading(true);
+        return signOut(auth);
+    };
+
     // To set the user
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -37,6 +43,7 @@ const LoginProvider = ({ children }) => {
         setUser,
         loading,
         googleSignIn,
+        logOut,
     };
 
     return (
