@@ -8,17 +8,15 @@ const Add = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const navigate = useNavigate();
-    const [category, setCategory] = useState("To-Do");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newTask = {
             title,
             description,
-            category,
+            category: "To-Do",
             email: user.email,
             timestamp: new Date().toLocaleString(),
-            taskID: Date.now(),
         };
         try {
             await axios.post(
@@ -53,18 +51,6 @@ const Add = () => {
                     onChange={(e) => setDescription(e.target.value)}
                     required
                 />
-
-                {/* Type */}
-
-                <select
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                    className="w-full p-2 mb-4 border rounded dark:bg-gray-700 dark:text-gray-100"
-                >
-                    <option value="To-Do">To-Do</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Done">Done</option>
-                </select>
 
                 <button
                     type="submit"
